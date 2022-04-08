@@ -50,8 +50,3 @@ for FILE in $(ls ${FIRST_PATH}); do
     fi
 done
 
-# Usuwanie uszkodzonych dowiązań symbolicznych i zapis do pliku
-for FILE in $(ls ${FIRST_PATH}); do
-    echo ${FILE}   
-done
-
