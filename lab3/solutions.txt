@@ -1,0 +1,49 @@
+
+Treść zadań:
+1.2 Znajdź w pliku access_log zapytania, które mają frazę ""denied"" w linku
+1.3 Znajdź w pliku access_log zapytania wysłane z IP: 64.242.88.10
+1.4 Znajdź w pliku access_log wszystkie zapytania NIEWYSŁANE z adresu IP tylko z FQDN
+1.5 Znajdź w pliku access_log unikalne zapytania typu DELETE
+
+Rozwiązania:
+1.2 
+cat access_log  | grep  "/denied"
+1.3
+cat access_log  | grep  "64\.242\.88\.10 "
+1.4
+cat access_log  | grep -P " 4\d\d " | grep -Pv "\d+\.\d+\.\d+\.\d+ "
+1.5
+cat access_log  | grep '"DELETE ' | sort -u
+
+-----------------------------------------------------------------------
+
+Treść zadań:
+2.1 Z pliku yolo.csv wypisz wszystkich, których id jest liczbą nieparzystą. Wyniki zapisz na standardowe wyjście błędów.
+2.3 Z pliku yolo.csv wypisz każdy numer IP, który w pierwszym i drugim oktecie ma po jednej cyfrze. Wyniki zapisz na standardowe wyjście błędów"
+
+Rozwiązania:
+2.1
+cat yolo.csv | cut -d ',' -f1,2,3 | grep -P "\d*[1,3,5,7,9]," 1>&2
+2.3
+cat yolo.csv | cut -d ',' -f6 | grep -P "^\d\.\d\.\d+\.\d+" 1>&2
+
+-----------------------------------------------------------------------
+
+Treść zadań:
+3.1 We wszystkich plikach w katalogu ‘groovies’ zamień $HEADER$ na /temat/
+3.3 We wszystkich plikach w katalogu ‘groovies’ usuń linijki zawierające frazę 'Help docs:'"
+
+Rozwiązania:
+3.1
+find groovies -type f -exec sed -i 's/\$HEADER\$/\/temat\//g' {} +
+3.3
+find groovies -type f -exec sed -i '/Help docs:/d' {} +
+
+-----------------------------------------------------------------------
+
+Treść zadań:
+4.2 Uruchom skrypt fakaping.sh, standardowe wyjście przekieruj do nicości, a błedy posortuj (nie usuwaj duplikatów).
+
+Rozwiązania:
+4.2
+./fakaping.sh > /dev/null | sort
